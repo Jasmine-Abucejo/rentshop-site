@@ -1,6 +1,7 @@
-const ProductCard = ({ title, image, price, status, className = "" }) => {
+const ProductCard = ({ viewDetails, item, className = "" }) => {
   return (
     <div
+      key={item.id}
       className={` w-full aspect-square  bg-white shadow-md rounded-lg overflow-hidden pb-2 ${className}`}
     >
       {/* Top pink design line */}
@@ -8,24 +9,27 @@ const ProductCard = ({ title, image, price, status, className = "" }) => {
 
       {/* Content */}
       <div className="lg:relative  group p-4 h-full w-full flex flex-col items-center justify-center text-center overflow-y-auto">
-        {image && (
+        {item.image && (
           <img
-            src={image}
-            alt={title}
+            src={item.image}
+            alt={item.title}
             className="w-auto h-2/3 object-contain mb-2 group-hover:opacity-25"
           />
         )}
         <button
+          id={item.id}
           className="absolute bottom-32 left-1/2 -translate-x-1/2 bg-pink-400 text-white px-4 py-2 rounded
                opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
                transition duration-300 z-10"
+          onClick={(e) => viewDetails(e, item.id, item)}
         >
           See Full Details
         </button>
-        {title && <p className="font-bold text-lg">{title}</p>}
-        {price && (
+        {item.title && <p className="font-bold text-lg">{item.title}</p>}
+        {item.price && (
           <p className="text-sm">
-            {price} <span className="italic text-gray-400">{status}</span>
+            {item.price}{" "}
+            <span className="italic text-gray-400">{item.status}</span>
           </p>
         )}
       </div>
