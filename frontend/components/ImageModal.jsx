@@ -17,18 +17,18 @@ const ImageModal = () => {
   return (
     <div className="fixed inset-0 bg-black/75  flex items-center justify-center z-50">
       <IoMdCloseCircleOutline
-        className="absolute left-10 top-10 text-5xl text-white "
+        className="absolute lg:left-30 left-10 lg:top-10 top-20 text-5xl text-white "
         onClick={handleClose}
       />
-      <div className="bg-white p-4 flex flex-col gap-2  rounded-lg shadow-lg w-1/2 h-4/5 items-center justify-center text-center">
-        <div className="w-full h-2 bg-pink-400 mb-2" />
-        <div className="flex  gap-4 w-auto h-9/10 items-center justify-center text-center">
+      <div className="bg-white  flex flex-col gap-2  rounded-lg shadow-lg lg:w-1/2 lg:h-4/5 w-4/5 items-center justify-center text-center">
+        <div className="w-full h-2 bg-pink-400 mb-2 rounded-t-lg" />
+        <div className="flex flex-col lg:flex-row  gap-4 w-auto h-9/10 items-center justify-center">
           <img
             src={imageData?.image}
             alt={imageData?.title}
-            className="h-3/5 min-w-1/2 object-contain"
+            className="w-64 h-64 object-cover rounded ml-4"
           />
-          <div>
+          <div className="text-center p-4">
             {" "}
             <p>
               Name: <span className="font-bold">{imageData?.title}</span>
@@ -39,6 +39,7 @@ const ImageModal = () => {
             <p>Length: </p>
             <p>Waist: </p>
             <p>Material: </p>
+            <p>Color: </p>
             <p>
               Price: <span className="font-bold">{imageData?.price}</span>
             </p>
@@ -50,8 +51,8 @@ const ImageModal = () => {
         <button
           className={`${
             imageData?.status === "reserved"
-              ? "opacity-50 pointer-events-none bg-gray-300 p-2 rounded-lg mb-8 w-md"
-              : "opacity-100 pointer-events-auto bg-pink-400 p-2 rounded-lg mb-8 w-md"
+              ? "opacity-50 pointer-events-none bg-gray-300 p-2 rounded-lg mb-8 lg:w-md w-xs"
+              : "opacity-100 pointer-events-auto bg-pink-400 p-2 rounded-lg mb-8 lg:w-md w-xs"
           }`}
           onClick={() => {
             rentItem(id, imageData);

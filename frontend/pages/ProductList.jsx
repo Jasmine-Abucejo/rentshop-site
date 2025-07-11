@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 const ProductList = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [detailsModal, setDetailsModal] = useState(false);
+
   const productItems = [
     {
       id: 1,
@@ -62,13 +62,6 @@ const ProductList = () => {
             viewDetails={viewDetails}
           />
         ))}
-      </div>
-      <div
-        className={`${
-          detailsModal ? "absolute z-50 top-20" : "hidden"
-        } border-2 w-1/2 h-auto`}
-      >
-        Details
       </div>
     </div>
   );

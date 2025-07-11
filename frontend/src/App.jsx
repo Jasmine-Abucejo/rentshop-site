@@ -14,10 +14,10 @@ function App() {
   const background = state?.backgroundLocation || null;
 
   return (
-    <div className="h-screen flex flex-col lg:flex-row">
+    <div className="h-screen flex  lg:flex-row">
       <Navbar />
       <div className="w-full h-full lg:ml-32 ">
-        <div className="w-full h-1/14 lg:h-1/7 bg-gray-100 flex justify-between p-4 sticky top-0 z-50">
+        <div className="w-full h-1/14 lg:h-1/7 bg-gray-100 flex justify-between p-4 sticky top-15 lg:top-0 z-25 mb-14 lg:mb-0">
           <div className="font-bold lg:text-4xl ">SHOP NAME</div>
           <div className="flex justify-between gap-4">
             <span className="lg:text-3xl">

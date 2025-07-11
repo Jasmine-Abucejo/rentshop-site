@@ -13,7 +13,8 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
           <img
             src={item.image}
             alt={item.title}
-            className="w-auto h-2/3 object-contain mb-2 group-hover:opacity-25"
+            className="w-36 h-36 object-cover mb-2 group-hover:opacity-25 lg:pointer-events-none"
+            onClick={(e) => viewDetails(e, item.id, item)}
           />
         )}
         <button
