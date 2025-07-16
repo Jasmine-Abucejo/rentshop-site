@@ -1,0 +1,20 @@
+import express from "express";
+import dotenv from "dotenv";
+import productRoutes from "./routes/productRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
+import { connectDB } from "./config/db.js";
+
+dotenv.config();
+console.log(process.env.PORT);
+const app = express();
+connectDB();
+
+app.use(express.json());
+app.use("/api/products", productRoutes);
+app.use("/api/clients", clientRoutes);
+
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+  console.log("Server started");
+});

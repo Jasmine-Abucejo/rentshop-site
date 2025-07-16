@@ -1,0 +1,21 @@
+{
+  "name": "shop-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasmine-Abucejo/rentshop-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Jasmine-Abucejo/rentshop-site/issues"
+  },
+  "homepage": "https://github.com/Jasmine-Abucejo/rentshop-site#readme"
+}
