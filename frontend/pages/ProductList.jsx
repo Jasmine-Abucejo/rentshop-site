@@ -1,11 +1,18 @@
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useProductStore } from "../store/productStore";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const ProductList = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const products = useProductStore((state) => state.products);
+  const fetchProducts = useProductStore((state) => state.fetchProducts);
+  console.log(products);
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
   const productItems = [
     {
       id: 1,
@@ -53,12 +60,23 @@ const ProductList = () => {
     });
   };
   return (
+    // <div>
+    //   <div className="grid grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+    //     {productItems.map((productItem) => (
+    //       <ProductCard
+    //         key={productItem.id}
+    //         item={productItem}
+    //         viewDetails={viewDetails}
+    //       />
+    //     ))}
+    //   </div>
+    // </div>
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        {productItems.map((productItem) => (
+        {products.map((product) => (
           <ProductCard
-            key={productItem.id}
-            item={productItem}
+            key={product._id}
+            item={product}
             viewDetails={viewDetails}
           />
         ))}
