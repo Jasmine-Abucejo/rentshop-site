@@ -25,32 +25,39 @@ const ImageModal = () => {
         <div className="flex flex-col lg:flex-row  gap-4 w-auto h-9/10 items-center justify-center">
           <img
             src={imageData?.image}
-            alt={imageData?.title}
+            alt={imageData?.productName}
             className="w-64 h-64 object-cover rounded ml-4"
           />
           <div className="text-center p-4">
             {" "}
             <p>
-              Name: <span className="font-bold">{imageData?.title}</span>
+              Name: <span className="font-bold">{imageData?.productName}</span>
             </p>
             <p>
-              Size: <span className="font-bold">S</span>
+              Size: <span className="font-bold">{imageData?.size}</span>
             </p>
             <p>Length: </p>
             <p>Waist: </p>
-            <p>Material: </p>
-            <p>Color: </p>
+            <p>
+              Material:<span className="font-bold">{imageData?.material}</span>{" "}
+            </p>
+            <p>
+              Color: <span className="font-bold">{imageData?.color}</span>
+            </p>
             <p>
               Price: <span className="font-bold">{imageData?.price}</span>
             </p>
             <p>
-              Status: <span className="font-bold">{imageData?.status}</span>
+              Status:{" "}
+              <span className="font-bold">
+                {imageData?.availability ? "Available" : "Unavailable"}
+              </span>
             </p>
           </div>
         </div>
         <button
           className={`${
-            imageData?.status === "reserved"
+            !imageData?.availability
               ? "opacity-50 pointer-events-none bg-gray-300 p-2 rounded-lg mb-8 lg:w-md w-xs"
               : "opacity-100 pointer-events-auto bg-pink-400 p-2 rounded-lg mb-8 lg:w-md w-xs"
           }`}

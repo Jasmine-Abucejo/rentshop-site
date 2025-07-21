@@ -6,9 +6,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 const ProductList = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const products = useProductStore((state) => state.products);
-  const fetchProducts = useProductStore((state) => state.fetchProducts);
+  const { fetchProducts, products } = useProductStore();
+  // const products = useProductStore((state) => state.products);
+  // const fetchProducts = useProductStore((state) => state.fetchProducts);
   console.log(products);
   useEffect(() => {
     fetchProducts();
