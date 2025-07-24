@@ -26,8 +26,8 @@ export const updateProduct = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully updated product availability",
-      product: updatedProductStatus,
+      message: "Successfully updated product request",
+      data: updatedProductStatus,
     });
   } catch (error) {
     res.status(500).json({

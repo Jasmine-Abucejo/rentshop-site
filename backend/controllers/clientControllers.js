@@ -5,7 +5,7 @@ export const updateClient = (req, res) => {
 };
 export const getClients = async (req, res) => {
   try {
-    const clients = await Client.find().populate("products"); // <-- magic here
+    const clients = await Client.find().populate("products");
     res.status(200).json({
       success: true,
       data: clients,
@@ -30,7 +30,7 @@ export const createClient = async (req, res) => {
   }
   const clientData = {
     ...client,
-    products: productId ? [productId] : [], // make sure it's an array
+    products: productId ? [productId] : [],
   };
   const newClient = new Client(clientData);
   try {
@@ -38,6 +38,7 @@ export const createClient = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "successfully added new client",
+      data: newClient,
     });
   } catch (error) {
     res

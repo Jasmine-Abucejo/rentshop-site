@@ -1,8 +1,29 @@
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useProductStore } from "../store/productStore";
 
 const RentPage = () => {
+  const { addClient, requestProduct } = useProductStore();
   const location = useLocation();
   const productData = location.state?.item;
+  const [newClient, setNewClient] = useState({
+    firstName: "",
+    lastName: "",
+    mobile: "",
+    dateNeeded: "",
+    status: "pending request",
+  });
+  const saveClient = async () => {
+    const { success, message } = await addClient(productData?._id, newClient);
+    const requestSent = await requestProduct(productData?._id);
+    console.log(success, message, requestSent.message);
+    setNewClient({
+      firstName: "",
+      lastName: "",
+      mobile: "",
+      dateNeeded: "",
+    });
+  };
   return (
     <div className="flex flex-col lg:flex-row p-4 gap-4 lg:justify-between ">
       <div className="bg-white flex flex-1 flex-col gap-2  rounded-lg w-4/5 shadow-lg lg:w-1/2 h-4/5 items-center justify-center text-center ml-10 lg:ml-0">
@@ -37,32 +58,61 @@ const RentPage = () => {
       <div className="text-center flex-1   flex flex-col">
         <p className="font-bold text-2xl mb-8">Client Data Form</p>
         <div className="grid grid-cols-3 text-left">
-          <label htmlFor="">Full Name: </label>
+          <label htmlFor="">First Name: </label>
           <input
+            value={newClient.firstName}
+            onChange={(e) =>
+              setNewClient({ ...newClient, firstName: e.target.value })
+            }
             type="text"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />
-          <label htmlFor="">Adress: </label>
+          <label htmlFor="">Last Name: </label>
           <input
+            value={newClient.lastName}
+            onChange={(e) =>
+              setNewClient({ ...newClient, lastName: e.target.value })
+            }
             type="text"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />
+          {/* <label htmlFor="">Adress: </label>
+          <input
+            type="text"
+            className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
+          /> */}
           <label htmlFor="">Contact No: </label>
           <input
+            value={newClient.mobile}
+            onChange={(e) =>
+              setNewClient({ ...newClient, mobile: e.target.value })
+            }
             type="tel"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />
-          <label htmlFor="">Email: </label>
+          {/* <label htmlFor="">Email: </label>
           <input
+            value={newClient.email}
+            onChange={setNewClient({ ...newClient, email: e.target.value })}
             type="email"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
-          />
+          /> */}
           <label htmlFor="">Date Needed: </label>
           <input
+            value={newClient.dateNeeded}
+            onChange={(e) =>
+              setNewClient({
+                ...newClient,
+                dateNeeded: e.target.value,
+              })
+            }
             type="date"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />
-          <button className="bg-pink-400 p-2 w-full rounded-lg mt-8 font-bold col-span-3">
+          <button
+            className="bg-pink-400 p-2 w-full rounded-lg mt-8 font-bold col-span-3"
+            onClick={saveClient}
+          >
             Submit Rent Application
           </button>
         </div>

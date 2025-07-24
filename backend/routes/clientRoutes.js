@@ -6,7 +6,7 @@ import {
 } from "../controllers/clientControllers.js";
 
 const router = express.Router();
-router.patch("/:productId", updateClient);
+router.patch("/:clientId", updateClient);
 router.post("/:productId", createClient);
 router.get("/", getClients);
 export default router;

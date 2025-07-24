@@ -14,6 +14,18 @@ const clientSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    // email: {
+    //   type: String,
+    //   required: true,
+    // },
+    dateNeeded: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   },
   { timestamps: true }
