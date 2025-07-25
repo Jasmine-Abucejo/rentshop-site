@@ -19,7 +19,7 @@ const clientSchema = mongoose.Schema(
     //   required: true,
     // },
     dateNeeded: {
-      type: Date,
+      type: String,
       required: true,
     },
     status: {

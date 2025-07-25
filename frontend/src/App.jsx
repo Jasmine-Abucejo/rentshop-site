@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { FaSearch } from "react-icons/fa";
 import { FaFilter } from "react-icons/fa";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import ProductList from "../pages/ProductList";
 import ImageModal from "../components/ImageModal";
 import RentPage from "../pages/RentPage";
@@ -76,6 +77,18 @@ function App() {
           <FaSearch className="text-pink-400 text-3xl" />
         </div>
       </div>
+      <Toaster
+        toastOptions={{
+          // Default options for specific types
+          success: {
+            duration: 15000,
+            iconTheme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

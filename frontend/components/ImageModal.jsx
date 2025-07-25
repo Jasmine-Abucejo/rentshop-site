@@ -28,7 +28,7 @@ const ImageModal = () => {
             alt={imageData?.productName}
             className="w-64 h-64 object-cover rounded ml-4"
           />
-          <div className="text-center p-4">
+          <div className="text-left p-4">
             {" "}
             <p>
               Name: <span className="font-bold">{imageData?.productName}</span>
@@ -50,17 +50,16 @@ const ImageModal = () => {
             <p>
               Status:{" "}
               <span className="font-bold">
-                {imageData?.availability ? "Available" : "Unavailable"}
+                {imageData?.availability ? "Available" : "Reserved for:"}
               </span>
+              {imageData?.dateReserved && (
+                <span className="text-sm">{imageData?.dateReserved}</span>
+              )}
             </p>
           </div>
         </div>
         <button
-          className={`${
-            !imageData?.availability
-              ? "opacity-50 pointer-events-none bg-gray-300 p-2 rounded-lg mb-8 lg:w-md w-xs"
-              : "opacity-100 pointer-events-auto bg-pink-400 p-2 rounded-lg mb-8 lg:w-md w-xs"
-          }`}
+          className="opacity-100 pointer-events-auto bg-pink-400 p-2 rounded-lg mb-8 lg:w-md w-xs"
           onClick={() => {
             rentItem(id, imageData);
           }}

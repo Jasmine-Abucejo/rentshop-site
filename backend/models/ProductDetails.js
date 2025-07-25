@@ -30,6 +30,10 @@ const productSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    dateReserved: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 );

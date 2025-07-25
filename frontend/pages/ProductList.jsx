@@ -60,17 +60,6 @@ const ProductList = () => {
     });
   };
   return (
-    // <div>
-    //   <div className="grid grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-    //     {productItems.map((productItem) => (
-    //       <ProductCard
-    //         key={productItem.id}
-    //         item={productItem}
-    //         viewDetails={viewDetails}
-    //       />
-    //     ))}
-    //   </div>
-    // </div>
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-4 p-4 gap-4">
         {products.map((product) => (

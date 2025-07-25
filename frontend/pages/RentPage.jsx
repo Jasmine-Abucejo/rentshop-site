@@ -1,11 +1,13 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useProductStore } from "../store/productStore";
+import toast from "react-hot-toast";
 
 const RentPage = () => {
   const { addClient, requestProduct } = useProductStore();
   const location = useLocation();
   const productData = location.state?.item;
+  const [inputDate, setInputDate] = useState("");
   const [newClient, setNewClient] = useState({
     firstName: "",
     lastName: "",
@@ -13,16 +15,37 @@ const RentPage = () => {
     dateNeeded: "",
     status: "pending request",
   });
+  const handleDateChange = (inputValue) => {
+    setInputDate(inputValue);
+    const dateObj = new Date(inputValue); // inputValue is in YYYY-MM-DD
+    const formattedDate = `${String(dateObj.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(dateObj.getDate()).padStart(2, "0")}-${dateObj.getFullYear()}`;
+
+    setNewClient((prev) => ({
+      ...prev,
+      dateNeeded: formattedDate,
+    }));
+  };
+
   const saveClient = async () => {
     const { success, message } = await addClient(productData?._id, newClient);
-    const requestSent = await requestProduct(productData?._id);
-    console.log(success, message, requestSent.message);
+
     setNewClient({
       firstName: "",
       lastName: "",
       mobile: "",
       dateNeeded: "",
     });
+    setInputDate("");
+    if (success) {
+      toast.success(
+        "Your request to rent this item has been sent. Kindly wait for the owner confirmation"
+      );
+    } else {
+      toast.error(message);
+    }
   };
   return (
     <div className="flex flex-col lg:flex-row p-4 gap-4 lg:justify-between ">
@@ -99,13 +122,8 @@ const RentPage = () => {
           /> */}
           <label htmlFor="">Date Needed: </label>
           <input
-            value={newClient.dateNeeded}
-            onChange={(e) =>
-              setNewClient({
-                ...newClient,
-                dateNeeded: e.target.value,
-              })
-            }
+            value={inputDate}
+            onChange={(e) => handleDateChange(e.target.value)}
             type="date"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />

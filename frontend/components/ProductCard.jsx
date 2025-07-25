@@ -29,18 +29,18 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
         {item.productName && (
           <p className="font-bold text-lg">{item.productName}</p>
         )}
-        {item.price && (
-          <p className="text-sm">
-            {item.price}{" "}
-            <span
-              className={`italic ${
-                item.availability ? "text-green-400" : "text-gray-400"
-              }`}
-            >
-              {item.availability ? "Available" : "Unavailable"}
-            </span>
-          </p>
-        )}
+        {item.price && <p className="text-sm">{item.price} </p>}
+
+        <p
+          className={`italic ${
+            item.availability ? "text-green-400" : "text-gray-400"
+          }`}
+        >
+          {item.availability ? "Available" : "Reserved for: "}
+          {item.dateReserved && (
+            <span className="text-sm">{item.dateReserved}</span>
+          )}
+        </p>
       </div>
     </div>
   );
