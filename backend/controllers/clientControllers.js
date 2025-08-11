@@ -29,7 +29,7 @@ export const getClient = async (req, res) => {
       .json({ success: false, message: "Invalid client id" });
   }
   try {
-    const client = await Client.findById(clientId);
+    const client = await Client.findById(clientId).populate("products");
     if (!client) {
       res.status(404).json({ success: false, message: "Client not found" });
     }

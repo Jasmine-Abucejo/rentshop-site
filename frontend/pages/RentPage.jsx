@@ -7,7 +7,7 @@ const RentPage = () => {
   const { addClient, requestProduct } = useProductStore();
   const location = useLocation();
   const productData = location.state?.item;
-  const [inputDate, setInputDate] = useState("");
+
   const [newClient, setNewClient] = useState({
     firstName: "",
     lastName: "",
@@ -15,19 +15,6 @@ const RentPage = () => {
     dateNeeded: "",
     status: "pending request",
   });
-  const handleDateChange = (inputValue) => {
-    setInputDate(inputValue);
-    const dateObj = new Date(inputValue); // inputValue is in YYYY-MM-DD
-    const formattedDate = `${String(dateObj.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(dateObj.getDate()).padStart(2, "0")}-${dateObj.getFullYear()}`;
-
-    setNewClient((prev) => ({
-      ...prev,
-      dateNeeded: formattedDate,
-    }));
-  };
 
   const saveClient = async () => {
     const { success, message } = await addClient(productData?._id, newClient);
@@ -122,8 +109,10 @@ const RentPage = () => {
           /> */}
           <label htmlFor="">Date Needed: </label>
           <input
-            value={inputDate}
-            onChange={(e) => handleDateChange(e.target.value)}
+            value={newClient.dateNeeded}
+            onChange={(e) =>
+              setNewClient({ ...newClient, dateNeeded: e.target.value })
+            }
             type="date"
             className="border-b-2 focus:outline-none focus:ring-0 focus:border-black col-span-2"
           />
