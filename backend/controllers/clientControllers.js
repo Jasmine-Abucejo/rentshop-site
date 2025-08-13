@@ -1,8 +1,34 @@
 import mongoose from "mongoose";
 import Client from "../models/ClientDetails.js";
 
-export const updateClient = (req, res) => {
-  res.status(200).json({ message: "Status successfully updated" });
+export const updateClient = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid request id.",
+    });
+  }
+  console.log("Incoming ID param:", id, "length:", id.length);
+  console.log("isValid:", mongoose.Types.ObjectId.isValid(id));
+  const client = req.body;
+
+  try {
+    const updatedClient = await Client.findByIdAndUpdate(id, client, {
+      new: true,
+    });
+    res.status(200).json({
+      success: true,
+      message: "Successfully updated this client",
+      data: updatedClient,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
 };
 export const getClients = async (req, res) => {
   try {

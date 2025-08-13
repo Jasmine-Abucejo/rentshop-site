@@ -26,6 +26,10 @@ const clientSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    returnDate: {
+      type: Date,
+      required: false,
+    },
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   },
   { timestamps: true }
