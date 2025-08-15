@@ -2,20 +2,19 @@ import mongoose from "mongoose";
 import Client from "../models/ClientDetails.js";
 
 export const updateClient = async (req, res) => {
-  const { id } = req.params;
+  const { clientId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(clientId)) {
     return res.status(400).json({
       success: false,
       message: "Invalid request id.",
     });
   }
-  console.log("Incoming ID param:", id, "length:", id.length);
-  console.log("isValid:", mongoose.Types.ObjectId.isValid(id));
+
   const client = req.body;
 
   try {
-    const updatedClient = await Client.findByIdAndUpdate(id, client, {
+    const updatedClient = await Client.findByIdAndUpdate(clientId, client, {
       new: true,
     });
     res.status(200).json({

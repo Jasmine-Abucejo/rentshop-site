@@ -1,33 +1,63 @@
 import Product from "../models/ProductDetails.js";
 import mongoose from "mongoose";
 
+// export const updateProduct = async (req, res) => {
+//   const { productId } = req.params;
+
+//   if (!mongoose.Types.ObjectId.isValid(productId)) {
+//     res.status(404).json({
+//       success: false,
+//       message: "Cannot Find Product",
+//     });
+//   }
+
+//   try {
+//     const selectedProduct = await Product.findById(productId);
+//     if (!selectedProduct) {
+//       res.status(404).json({
+//         success: false,
+//         message: "Cannot find product",
+//       });
+//     }
+
+//     selectedProduct.availability = !selectedProduct.availability;
+
+//     const updatedProductStatus = await selectedProduct.save();
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Successfully updated product request",
+//       data: updatedProductStatus,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
 export const updateProduct = async (req, res) => {
   const { productId } = req.params;
-
+  const product = req.body;
   if (!mongoose.Types.ObjectId.isValid(productId)) {
     res.status(404).json({
       success: false,
-      message: "Cannot Find Product",
+      message: "Cannot find this product",
     });
   }
 
   try {
-    const selectedProduct = await Product.findById(productId);
-    if (!selectedProduct) {
-      res.status(404).json({
-        success: false,
-        message: "Cannot find product",
-      });
-    }
-
-    selectedProduct.availability = !selectedProduct.availability;
-
-    const updatedProductStatus = await selectedProduct.save();
+    const reservedProduct = await Product.findByIdAndUpdate(
+      productId,
+      product,
+      { new: true }
+    );
 
     res.status(200).json({
       success: true,
-      message: "Successfully updated product request",
-      data: updatedProductStatus,
+      message: "Successfully added reservation for this product",
+      data: reservedProduct,
     });
   } catch (error) {
     res.status(500).json({
@@ -36,7 +66,6 @@ export const updateProduct = async (req, res) => {
     });
   }
 };
-
 export const createProduct = async (req, res) => {
   const product = req.body;
 
