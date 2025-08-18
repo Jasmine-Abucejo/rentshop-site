@@ -25,7 +25,7 @@ const RentPage = () => {
       mobile: "",
       dateNeeded: "",
     });
-    setInputDate("");
+    // setInputDate("");
     if (success) {
       toast.success(
         "Your request to rent this item has been sent. Kindly wait for the owner confirmation"

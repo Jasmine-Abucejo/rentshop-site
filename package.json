@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Jasmine-Abucejo/rentshop-site/issues"
   },
-  "homepage": "https://github.com/Jasmine-Abucejo/rentshop-site#readme"
+  "homepage": "https://github.com/Jasmine-Abucejo/rentshop-site#readme",
+  "dependencies": {
+    "react-tiny-popover": "^8.1.6"
+  }
 }
