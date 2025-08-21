@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Jasmine-Abucejo/rentshop-site#readme",
   "dependencies": {
-    "react-tiny-popover": "^8.1.6"
+    "@tailwindcss/vite": "^4.1.12",
+    "react-tiny-popover": "^8.1.6",
+    "tailwindcss": "^4.1.12"
   }
 }

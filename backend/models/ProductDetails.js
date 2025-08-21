@@ -34,6 +34,10 @@ const productSchema = mongoose.Schema(
       type: [Date],
       default: [],
     },
+    returnDates: {
+      type: [Date],
+      default: [],
+    },
   },
   { timestamps: true }
 );
