@@ -26,7 +26,7 @@ const ImageModal = () => {
           <img
             src={imageData?.image}
             alt={imageData?.productName}
-            className="w-64 h-64 object-cover rounded ml-4"
+            className="w-64 h-76 object-cover rounded ml-4"
           />
           <div className="text-left p-4">
             {" "}
@@ -46,15 +46,6 @@ const ImageModal = () => {
             </p>
             <p>
               Price: <span className="font-bold">{imageData?.price}</span>
-            </p>
-            <p>
-              Status:{" "}
-              <span className="font-bold">
-                {imageData?.availability ? "Available" : "Reserved for:"}
-              </span>
-              {imageData?.dateReserved && (
-                <span className="text-sm">{imageData?.dateReserved}</span>
-              )}
             </p>
           </div>
         </div>

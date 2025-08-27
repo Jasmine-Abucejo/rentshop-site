@@ -14,6 +14,9 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
     // Split at "T" → take only the first part
     return date.toISOString().split("T")[0];
   };
+  const formattedReturnDates = returnDates.map((dateObj) =>
+    formatDate(dateObj)
+  );
   const formattedReservationDates = reservationDates.map((dateObj) =>
     formatDate(dateObj)
   );
@@ -70,7 +73,7 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
                   formattedReservationDates.length > 0 ? (
                     formattedReservationDates.map((date, index) => (
                       <p>
-                        ➤{date} - {returnDates[index]}
+                        ➤{date} - {formattedReturnDates[index]}
                       </p>
                     ))
                   ) : (

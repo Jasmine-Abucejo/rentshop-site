@@ -36,9 +36,9 @@ const RentPage = () => {
   };
   return (
     <div className="flex flex-col lg:flex-row p-4 gap-4 lg:justify-between ">
-      <div className="bg-white flex flex-1 flex-col gap-2  rounded-lg w-4/5 shadow-lg lg:w-1/2 h-4/5 items-center justify-center text-center ml-10 lg:ml-0">
-        <div className="w-full h-2 bg-pink-400 mb-2 rounded-t-lg" />
-        <div className="flex lg:flex-row flex-col  gap-4 w-auto h-9/10 items-center justify-center text-center m-4">
+      <div className="bg-white flex flex-1 flex-col gap-1  rounded-lg w-4/5 shadow-lg max-h-120 lg:max-h-98 text-center ml-10 lg:ml-0">
+        <div className="w-full h-12 bg-pink-400 mb-2 rounded-t-lg">...</div>
+        <div className="flex lg:flex-row flex-col  gap-2 w-auto h-screen   m-2">
           <img
             src={productData?.image}
             alt={productData?.title}
@@ -47,20 +47,21 @@ const RentPage = () => {
           <div className="text-left">
             {" "}
             <p>
-              Name: <span className="font-bold">{productData?.title}</span>
+              Name:{" "}
+              <span className="font-bold">{productData?.productName}</span>
             </p>
             <p>
               Size: <span className="font-bold">S</span>
             </p>
             <p>Length: </p>
             <p>Waist: </p>
-            <p>Material: </p>
+            <p>
+              Material:{" "}
+              <span className="font-bold">{productData?.material}</span>
+            </p>
             <p>Color:</p>
             <p>
               Price: <span className="font-bold">{productData?.price}</span>
-            </p>
-            <p>
-              Status: <span className="font-bold">{productData?.status}</span>
             </p>
           </div>
         </div>
