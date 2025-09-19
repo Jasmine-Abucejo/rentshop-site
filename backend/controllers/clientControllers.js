@@ -31,7 +31,8 @@ export const updateClient = async (req, res) => {
 };
 export const getClients = async (req, res) => {
   try {
-    const clients = await Client.find().populate("products");
+    const filter = { ...req.query };
+    const clients = await Client.find(filter).populate("products");
     res.status(200).json({
       success: true,
       data: clients,
@@ -42,6 +43,33 @@ export const getClients = async (req, res) => {
       message: "Server error while fetching clients",
     });
     console.log(error.message);
+  }
+};
+
+export const getClientsByDate = async (req, res) => {
+  try {
+    const groupedClients = await Client.aggregate([
+      { $match: matchStage }, // optional filter by status, etc.
+      {
+        $lookup: {
+          from: "Products", // name of the products collection
+          localField: "products", // field in Client schema
+          foreignField: "_id", // field in Product schema
+          as: "products", // what to call the populated array
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          clients: { $push: "$$ROOT" },
+        },
+      },
+      { $sort: { _id: -1 } },
+    ]);
+
+    res.status(200).json({ success: true, data: groupedClients });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 

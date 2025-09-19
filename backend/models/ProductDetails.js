@@ -28,7 +28,7 @@ const productSchema = mongoose.Schema(
     },
     availability: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     reservationDates: {
       type: [Date],

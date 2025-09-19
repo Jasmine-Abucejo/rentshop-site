@@ -31,10 +31,6 @@ const clientSchema = mongoose.Schema(
       required: false,
     },
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
-    returned: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   { timestamps: true }
