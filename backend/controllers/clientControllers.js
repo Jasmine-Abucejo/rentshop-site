@@ -49,13 +49,12 @@ export const getClients = async (req, res) => {
 export const getClientsByDate = async (req, res) => {
   try {
     const groupedClients = await Client.aggregate([
-      { $match: matchStage }, // optional filter by status, etc.
       {
         $lookup: {
-          from: "Products", // name of the products collection
-          localField: "products", // field in Client schema
-          foreignField: "_id", // field in Product schema
-          as: "products", // what to call the populated array
+          from: "products", // must match the actual collection name in MongoDB (lowercase)
+          localField: "products",
+          foreignField: "_id",
+          as: "products",
         },
       },
       {
@@ -64,10 +63,23 @@ export const getClientsByDate = async (req, res) => {
           clients: { $push: "$$ROOT" },
         },
       },
-      { $sort: { _id: -1 } },
+      {
+        $project: {
+          _id: 0,
+          date: "$_id",
+          clients: 1,
+        },
+      },
+      { $sort: { date: -1 } },
     ]);
 
-    res.status(200).json({ success: true, data: groupedClients });
+    res
+      .status(200)
+      .json({
+        success: true,
+        data: groupedClients,
+        message: "Successfully grouped data",
+      });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
