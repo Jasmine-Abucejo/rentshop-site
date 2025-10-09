@@ -1,6 +1,7 @@
 import { Popover } from "react-tiny-popover";
 import { FaClipboardList } from "react-icons/fa";
 import { useState } from "react";
+import { Textfit } from "react-textfit";
 
 const ProductCard = ({ viewDetails, item, className = "" }) => {
   const reservationDates = item.reservationDates;
@@ -25,55 +26,70 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
   return (
     <div
       key={item._id}
-      className={` w-full aspect-auto bg-white shadow-md rounded-lg overflow-hidden pb-2 ${className}`}
+      className={`w-full h-100 bg-white shadow-md rounded-lg overflow-hidden pb-2 ${className}`}
     >
       {/* Top pink design line */}
-      <div className="w-full h-2 bg-pink-400 " />
+      <div className="w-full h-2 bg-pink-400" />
 
       {/* Content */}
-      <div className="lg:relative  group  h-full w-full flex flex-col   overflow-y-auto">
+      <div className="group relative h-full w-full flex flex-col">
+        {/* Image section */}
         {item.image && (
           <img
             src={item.image}
             alt={item.productName}
-            className="w-full h-3/4 object-cover mb-2 group-hover:opacity-25 lg:pointer-events-none"
+            className="w-full h-3/4 object-cover  group-hover:opacity-25 lg:pointer-events-none"
             onClick={(e) => viewDetails(e, item.id, item)}
           />
         )}
+
+        {/* Hover Button */}
         <button
           id={item._id}
           className="absolute bottom-32 left-1/2 -translate-x-1/2 bg-pink-400 text-white px-4 py-2 rounded
-               opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
-               transition duration-300 z-10"
+                 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
+                 transition duration-300 z-10"
           onClick={(e) => viewDetails(e, item._id, item)}
         >
           See Full Details
         </button>
-        <div className="p-2">
-          <div className="flex justify-between">
+
+        {/* Bottom text + popover */}
+        <div className="flex-1 flex flex-col justify-between p-2">
+          <div className="flex justify-between items-center flex-1">
             {item.productName && (
-              <span className="font-bold text-lg "> {item.productName}</span>
+              <Textfit
+                mode="multi"
+                min={10}
+                max={24}
+                className="font-bold text-left leading-tight flex-1"
+              >
+                {item.productName}
+              </Textfit>
             )}
 
-            {item.price && <span className="text-sm">{item.price} </span>}
+            {item.price && (
+              <span className="text-sm whitespace-nowrap ml-2">
+                {item.price}
+              </span>
+            )}
           </div>
+
           <Popover
             isOpen={isPopoverOpen}
             positions={["right", "left"]}
             align="center"
             onClickOutside={() => setIsPopoverOpen(false)}
             content={
-              <div className="bg-white border-2 z-50 ">
+              <div className="bg-white border-2 z-50">
                 <div className="border-b-2 bg-pink-400 p-2">
                   Rented dates for {item.productName}
                 </div>
                 <div className="p-2">
-                  {" "}
-                  {formattedReservationDates &&
-                  formattedReservationDates.length > 0 ? (
+                  {formattedReservationDates?.length > 0 ? (
                     formattedReservationDates.map((date, index) => (
-                      <p>
-                        ➤{date} - {formattedReturnDates[index]}
+                      <p key={index}>
+                        ➤ {date} - {formattedReturnDates[index]}
                       </p>
                     ))
                   ) : (
@@ -83,11 +99,11 @@ const ProductCard = ({ viewDetails, item, className = "" }) => {
               </div>
             }
           >
-            <p className="text-gray-400 italic">
-              See unavailable dates:{""}
+            <p className="text-gray-400 italic text-center mt-1">
+              See unavailable dates:{" "}
               <FaClipboardList
                 onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-                className="inline"
+                className="inline cursor-pointer"
               />
             </p>
           </Popover>
