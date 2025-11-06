@@ -1,7 +1,7 @@
 import { Popover } from "react-tiny-popover";
 import { FaClipboardList } from "react-icons/fa";
 import { useState } from "react";
-import { Textfit } from "react-textfit";
+import { Textfit } from "@dalee9000/react19-ts-textfit";
 
 const ProductCard = ({ viewDetails, item, className = "" }) => {
   const reservationDates = item.reservationDates;
